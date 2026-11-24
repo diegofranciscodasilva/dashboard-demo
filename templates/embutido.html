@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Dashboard Embutido</h1>
+<p class="sub">Widget que pode ser incorporado em qualquer site com um <code>iframe</code>.</p>
+
+<div class="card filtros">
+    <label>Tema do widget
+        <select id="tema-widget">
+            <option value="light">Claro</option>
+            <option value="dark">Escuro</option>
+        </select>
+    </label>
+</div>
+
+<section class="grid dois">
+    <div class="card">
+        <h3>Pré-visualização</h3>
+        <iframe id="frame-widget" title="Widget de vendas" width="100%" height="320"></iframe>
+    </div>
+    <div class="card">
+        <h3>Código para incorporar</h3>
+        <textarea id="codigo-embed" rows="6" readonly aria-label="Código do iframe"></textarea>
+    </div>
+</section>
+{% endblock %}

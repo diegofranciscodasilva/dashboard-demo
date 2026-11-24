@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Exemplos de dashboards</h1>
+<p class="sub">Escolha um tipo de dashboard para explorar.</p>
+<section class="grid dois">
+    {% for chave, nome in paginas.items() %}
+    <a class="card link-card" href="/{{ chave }}">
+        <h3>{{ nome }}</h3>
+        <span class="sub">Abrir dashboard</span>
+    </a>
+    {% endfor %}
+</section>
+{% endblock %}

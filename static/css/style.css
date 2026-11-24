@@ -1,0 +1,342 @@
+/* ===== Variáveis de tema ===== */
+:root {
+    --bg: #f4f6fa;
+    --card: #ffffff;
+    --texto: #1f2937;
+    --suave: #6b7280;
+    --borda: #e5e7eb;
+    --primaria: #2563eb;
+    --ok: #16a34a;
+    --erro: #dc2626;
+    --aviso: #d97706;
+    --raio: 12px;
+    --sombra: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+[data-tema="dark"] {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --texto: #e2e8f0;
+    --suave: #94a3b8;
+    --borda: #334155;
+    --sombra: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    line-height: 1.5;
+}
+
+h1 {
+    margin: 0 0 4px;
+    font-size: 1.6rem;
+}
+
+a {
+    color: var(--primaria);
+}
+
+:focus-visible {
+    outline: 2px solid var(--primaria);
+    outline-offset: 2px;
+}
+
+.pular {
+    position: absolute;
+    left: -999px;
+    background: var(--primaria);
+    color: #fff;
+    padding: 8px 12px;
+    z-index: 20;
+}
+
+.pular:focus {
+    left: 8px;
+    top: 8px;
+}
+
+/* ===== Cabeçalho ===== */
+.topo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: var(--card);
+    border-bottom: 1px solid var(--borda);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.marca {
+    font-weight: 700;
+    color: var(--primaria);
+    text-decoration: none;
+    margin-right: auto;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.menu a {
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: var(--texto);
+    text-decoration: none;
+}
+
+.menu a:hover,
+.menu a.ativo {
+    background: var(--primaria);
+    color: #fff;
+}
+
+.btn-menu {
+    display: none;
+}
+
+/* ===== Layout ===== */
+.conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    min-height: 70vh;
+}
+
+.sub {
+    color: var(--suave);
+    margin-top: 0;
+}
+
+.grid {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.kpis {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.dois {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+}
+
+.rodape {
+    text-align: center;
+    color: var(--suave);
+    padding: 24px;
+    font-size: .9rem;
+}
+
+/* ===== Cards ===== */
+.card {
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--sombra);
+}
+
+.grid .card {
+    margin-bottom: 0;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.card strong {
+    display: block;
+    font-size: 1.8rem;
+    margin: 4px 0;
+}
+
+.card canvas {
+    max-height: 320px;
+}
+
+.link-card {
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s, box-shadow .15s;
+}
+
+.link-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+}
+
+.pos {
+    color: var(--ok);
+}
+
+.neg {
+    color: var(--erro);
+}
+
+/* ===== Formulários e botões ===== */
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: end;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: .9rem;
+    color: var(--suave);
+}
+
+input,
+select,
+textarea {
+    padding: 8px 10px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--texto);
+    font: inherit;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    font-family: ui-monospace, Consolas, monospace;
+}
+
+iframe {
+    border: 0;
+    border-radius: var(--raio);
+    width: 100%;
+}
+
+.btn,
+.btn-menu {
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--primaria);
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+}
+
+.btn:hover,
+.btn-menu:hover {
+    opacity: .9;
+}
+
+.btn.pequeno {
+    padding: 4px 10px;
+    font-size: .85rem;
+}
+
+.btn.perigo {
+    background: var(--erro);
+}
+
+/* ===== Tabelas ===== */
+.tabela {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--borda);
+    white-space: nowrap;
+}
+
+th {
+    color: var(--suave);
+    font-weight: 600;
+    font-size: .85rem;
+}
+
+/* ===== Badges e alerta ===== */
+.badge {
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: .8rem;
+    color: #fff;
+}
+
+.badge.ok {
+    background: var(--ok);
+}
+
+.badge.erro {
+    background: var(--erro);
+}
+
+.badge.aviso {
+    background: var(--aviso);
+}
+
+.alerta {
+    max-width: 1200px;
+    margin: 12px auto 0;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--erro);
+    color: #fff;
+}
+
+.alerta[hidden] {
+    display: none;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+    .topo {
+        padding: 12px;
+    }
+
+    .conteudo {
+        padding: 12px;
+    }
+
+    .btn-menu {
+        display: inline-block;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        order: 5;
+    }
+
+    .menu.aberto {
+        display: flex;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}

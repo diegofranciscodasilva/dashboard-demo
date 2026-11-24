@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Dashboard Analítico</h1>
+<p class="sub">Explore as vendas por região e categoria.</p>
+
+<section class="filtros card">
+    <label>Região
+        <select id="f-regiao">
+            <option value="">Todas</option>
+        </select>
+    </label>
+    <label>Categoria
+        <select id="f-categoria">
+            <option value="">Todas</option>
+        </select>
+    </label>
+</section>
+
+<section class="grid dois">
+    <div class="card">
+        <h3>Vendas por mês</h3>
+        <canvas id="grafico-mensal" role="img" aria-label="Linha com vendas mensais"></canvas>
+    </div>
+    <div class="card">
+        <h3>Participação por categoria</h3>
+        <canvas id="grafico-categoria" role="img" aria-label="Rosca com participação por categoria"></canvas>
+    </div>
+</section>
+
+<div class="card tabela">
+    <h3>Top 10 produtos</h3>
+    <table id="tabela-top">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Qtd.</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+{% endblock %}

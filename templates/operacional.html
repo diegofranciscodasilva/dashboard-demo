@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Dashboard Operacional</h1>
+<p class="sub">Atualização automática a cada 3 segundos.
+    <span id="aviso-simulado" class="badge aviso" hidden>métricas simuladas</span>
+</p>
+
+<section class="grid kpis" aria-live="polite">
+    <div class="card"><span class="sub">CPU</span><strong id="cpu">--</strong></div>
+    <div class="card"><span class="sub">Memória</span><strong id="memoria">--</strong></div>
+    <div class="card"><span class="sub">Disco</span><strong id="disco">--</strong></div>
+    <div class="card"><span class="sub">Chamados abertos</span><strong id="abertos">--</strong></div>
+</section>
+
+<section class="grid dois">
+    <div class="card">
+        <h3>CPU e memória (ao vivo)</h3>
+        <canvas id="grafico-live" role="img" aria-label="Linha com uso de CPU e memória ao longo do tempo"></canvas>
+    </div>
+    <div class="card">
+        <h3>Chamados por status</h3>
+        <canvas id="grafico-status" role="img" aria-label="Barras com a quantidade de chamados por status"></canvas>
+    </div>
+</section>
+
+<div class="card tabela">
+    <h3>Últimos chamados</h3>
+    <table id="tabela-chamados">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Prioridade</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+{% endblock %}

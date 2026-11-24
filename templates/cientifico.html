@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Dashboard Científico/Técnico</h1>
+<p class="sub">Série temporal de um sensor com média móvel, tendência e anomalias.</p>
+
+<section class="grid kpis">
+    <div class="card"><span class="sub">Média</span><strong id="s-media">--</strong></div>
+    <div class="card"><span class="sub">Desvio-padrão</span><strong id="s-desvio">--</strong></div>
+    <div class="card"><span class="sub">Mín. / Máx.</span><strong id="s-minmax">--</strong></div>
+    <div class="card"><span class="sub">Inclinação (°C por leitura)</span><strong id="s-incl">--</strong></div>
+</section>
+
+<div class="card filtros">
+    <label>Janela da média móvel: <b id="janela-valor">10</b>
+        <input id="janela" type="range" min="2" max="50" value="10">
+    </label>
+</div>
+
+<div class="card">
+    <canvas id="grafico-cientifico" role="img"
+        aria-label="Série de temperatura com média móvel, tendência e anomalias"></canvas>
+</div>
+{% endblock %}

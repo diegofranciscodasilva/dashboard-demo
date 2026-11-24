@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Seis exemplos de dashboards com Flask, SQLite e Chart.js.">
+    <title>Dashboards Demo</title>
+    <!-- Aplica o tema salvo antes de renderizar (evita "piscar") -->
+    <script>document.documentElement.dataset.tema = localStorage.getItem("tema") || "light";</script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body data-page="{{ pagina|default('') }}">
+    <a class="pular" href="#principal">Pular para o conteúdo</a>
+
+    <header class="topo">
+        <a class="marca" href="/">Dashboards Demo</a>
+
+        <button id="btn-menu" class="btn-menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+
+        <nav id="menu" class="menu" aria-label="Principal">
+            {% for chave, nome in paginas.items() %}
+            <a href="/{{ chave }}" {% if chave==pagina %}class="ativo" aria-current="page" {% endif %}>{{ nome }}</a>
+            {% endfor %}
+        </nav>
+
+        <button id="btn-tema" class="btn" type="button" aria-label="Alternar tema claro ou escuro">Tema</button>
+    </header>
+
+    <div id="erro-global" class="alerta" role="alert" hidden></div>
+
+    <main id="principal" class="conteudo">
+        {% block conteudo %}{% endblock %}
+    </main>
+
+    <footer class="rodape">Projeto de demonstração &copy; <span id="ano"></span></footer>
+
+    <!-- Chart.js local (offline); se não existir, usa o CDN como alternativa -->
+    <script src="{{ url_for('static', filename='vendor/chart.umd.js') }}"></script>
+    <script>window.Chart || document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.js"><\/script>')</script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>

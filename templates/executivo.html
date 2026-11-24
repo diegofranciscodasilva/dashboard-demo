@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Dashboard Executivo</h1>
+<p class="sub">Visão consolidada dos últimos 30 dias.</p>
+
+<section class="grid kpis">
+    <div class="card"><span class="sub">Receita (30 dias)</span><strong id="k-receita">--</strong><small
+            id="k-variacao"></small></div>
+    <div class="card"><span class="sub">Pedidos</span><strong id="k-pedidos">--</strong></div>
+    <div class="card"><span class="sub">Ticket médio</span><strong id="k-ticket">--</strong></div>
+    <div class="card"><span class="sub">Atingimento da meta</span><strong id="k-meta-pct">--</strong></div>
+</section>
+
+<section class="grid dois">
+    <div class="card">
+        <h3>Meta mensal</h3>
+        <canvas id="grafico-meta" role="img" aria-label="Rosca com o percentual da meta atingido"></canvas>
+    </div>
+    <div class="card">
+        <h3>Tendência de receita</h3>
+        <canvas id="grafico-tendencia" role="img" aria-label="Linha com a receita mensal"></canvas>
+    </div>
+</section>
+{% endblock %}

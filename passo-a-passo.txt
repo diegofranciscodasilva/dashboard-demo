@@ -1,0 +1,180 @@
+PASSO A PASSO - DASHBOARDS DEMO
+================================
+
+1. Visao geral
+--------------
+Este projeto e uma demonstracao de dashboards feita em Flask. Ele combina:
+- paginas HTML renderizadas pelo servidor;
+- APIs JSON;
+- banco SQLite;
+- graficos Chart.js;
+- NumPy para analise da serie cientifica;
+- psutil para metricas reais do sistema quando executado localmente.
+
+O projeto possui seis dashboards:
+- Operacional;
+- Analitico;
+- Executivo;
+- Administrativo;
+- Cientifico;
+- Embutido.
+
+
+2. Preparacao do ambiente
+--------------------------
+No Windows, abra o terminal na pasta dashboards-demo.
+
+Crie um ambiente virtual:
+python -m venv .venv
+
+Ative o ambiente virtual no PowerShell:
+.venv\Scripts\Activate.ps1
+
+Instale as dependencias:
+python -m pip install -r requirements.txt
+
+As dependencias sao Flask, NumPy e psutil.
+
+
+3. Banco de dados
+-----------------
+O arquivo dados.db contem os dados de demonstracao. Ele usa quatro tabelas:
+- vendas: vendas com data, produto, categoria, regiao, quantidade e valor;
+- chamados: chamados operacionais, status e prioridade;
+- usuarios: usuarios, perfil e situacao ativa/inativa;
+- medicoes: temperaturas registradas ao longo do tempo.
+
+Para recriar o banco manualmente:
+python seed.py
+
+O banco sera recriado em dados.db com dados ficticios deterministicos.
+Ao iniciar app.py, o banco sera criado automaticamente caso nao exista.
+
+
+4. Executar localmente
+----------------------
+Execute:
+python app.py
+
+Depois abra no navegador:
+http://127.0.0.1:5000
+
+O servidor local usa dados.db e mostra metricas reais de CPU, memoria e disco por meio do psutil.
+
+
+5. Paginas principais
+---------------------
+Pagina inicial (/):
+- apresenta os seis tipos de dashboard.
+
+Dashboard operacional (/operacional):
+- consulta /api/operacional a cada tres segundos;
+- mostra CPU, memoria, disco e chamados abertos;
+- usa dados simulados na nuvem e dados reais localmente.
+
+Dashboard analitico (/analitico):
+- permite filtrar por regiao e categoria;
+- consulta /api/analitico;
+- exibe vendas mensais, participacao por categoria e top dez produtos.
+
+Dashboard executivo (/executivo):
+- consulta /api/executivo;
+- calcula receita, pedidos, ticket medio e comparacao dos ultimos trinta dias;
+- compara a receita com a meta fixa de R$ 400.000.
+
+Dashboard administrativo (/administrativo):
+- consome os endpoints /api/usuarios;
+- permite criar, ativar/desativar e excluir usuarios;
+- limita a sessao publica a cinquenta usuarios.
+
+Dashboard cientifico (/cientifico):
+- consulta /api/cientifico;
+- aplica media movel, tendencia linear e deteccao de anomalias;
+- permite ajustar a janela da media movel.
+
+Dashboard embutido (/embutido):
+- permite escolher o tema claro ou escuro;
+- gera um iframe apontando para /widget/vendas;
+- mostra o codigo pronto para incorporacao em outro site.
+
+
+6. APIs
+-------
+GET /api/operacional
+Retorna metricas do sistema, chamados por status e chamados recentes.
+
+GET /api/analitico
+Aceita filtros opcionais: regiao e categoria.
+
+GET /api/executivo
+Retorna indicadores executivos e tendencia mensal.
+
+GET /api/usuarios
+Lista usuarios.
+
+POST /api/usuarios
+Cria um usuario enviando JSON com nome, email e perfil.
+
+PATCH /api/usuarios/<id>
+Alterna o usuario entre ativo e inativo.
+
+DELETE /api/usuarios/<id>
+Remove o usuario.
+
+GET /api/cientifico?janela=<numero>
+Retorna a serie cientifica, media movel, tendencia e indices de anomalias.
+
+
+7. Chart.js
+-----------
+O projeto ja pode usar a copia local:
+static/vendor/chart.umd.js
+
+Caso ela nao esteja presente ou esteja desatualizada, baixe uma vez com internet:
+python baixar_chartjs.py
+
+Os templates tambem possuem CDN como alternativa de carregamento.
+
+
+8. Testes
+---------
+Execute:
+python test_smoke.py
+
+Os testes verificam:
+- todas as paginas principais;
+- todas as APIs basicas;
+- respostas 404;
+- valores invalidos da janela cientifica;
+- anomalias injetadas;
+- criacao, duplicidade, alternancia e exclusao de usuarios.
+
+No ambiente analisado, os seis testes passaram.
+
+
+9. Implantacao na Vercel
+------------------------
+Os arquivos vercel.json e api/index.py configuram o projeto como aplicacao serverless.
+
+Na Vercel:
+- o banco fica em /tmp/dados.db;
+- /tmp possui escrita, mas nao garante persistencia entre execucoes ou instancias;
+- o ambiente detecta a nuvem pela variavel VERCEL;
+- as metricas do sistema sao simuladas.
+
+Portanto, o CRUD pode funcionar em uma execucao, mas pode perder dados em reinicializacoes e execucoes novas.
+
+
+10. Resultado da analise
+-----------------------
+Resultado dos testes: sem falhas encontradas no fluxo testado.
+
+Alertas identificados:
+- o SQLite em /tmp nao fornece persistencia confiavel na Vercel;
+- nao existe autenticacao ou autorizacao no CRUD publico;
+- nao existe arquivo formal de migracoes ou controle de schema;
+- nao existe dependencia de banco externo configurada;
+- o projeto nao possui arquivo formal de versao ou tag de release;
+- debug=True esta definido no fluxo local.
+
+Nenhuma correcao de codigo foi aplicada nesta etapa.
